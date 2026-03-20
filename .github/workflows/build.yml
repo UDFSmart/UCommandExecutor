@@ -43,7 +43,7 @@ jobs:
       - name: Create ZIP
         run: |
           mkdir build
-          zip -r build/UFLogger.zip \
+          zip -r build/UCommandExecutor.zip \
             src/ examples/ library.properties README.md LICENSE
 
       # 7.
@@ -51,4 +51,4 @@ jobs:
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v1
         with:
-          files: build/UfLogger.zip
+          files: build/UCommandExecutor.zip
