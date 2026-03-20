@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/UDFSmart/UCommandExecutor/releases/tag/v1.0.0)
 
 A lightweight, memory-efficient command executor for **Arduino**, **ESP8266**, and **ESP32**. 
 
