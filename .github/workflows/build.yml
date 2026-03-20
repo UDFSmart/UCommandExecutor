@@ -1,0 +1,54 @@
+name: Build & Release UfLogger
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2.
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v1
+
+      # 3.
+      - name: Update core index
+        run: |
+          arduino-cli core update-index
+
+      # 4.
+      - name: Install cores
+        run: |
+          arduino-cli core install arduino:avr
+          arduino-cli core install esp32:esp32
+
+      # 5.
+      - name: Compile examples
+        run: |
+          arduino-cli compile \
+            --fqbn arduino:avr:uno \
+            --library . \
+            examples/Basic
+
+      # 6.
+      - name: Create ZIP
+        run: |
+          mkdir build
+          zip -r build/UFLogger.zip \
+            src/ examples/ library.properties README.md LICENSE
+
+      # 7.
+      - name: Upload Release Asset
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/UfLogger.zip
